@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,12 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model city {
+enum Role {
+  USER
+  ADMIN
+  SUPER_ADMIN
+  SELLER
+}
+
+model City {
   id        Int      @id @default(autoincrement())
-  name      String
+  name      String   @unique
+  users     User[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  User      User[]
 }
 
 model User {
@@ -29,48 +30,35 @@ model User {
   password  String
   role      Role     @default(USER)
   cityId    Int
-  city      city     @relation(fields: [cityId], references: [id])
+  city      City     @relation(fields: [cityId], references: [id])
+  products  Product[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Elon      Elon[]
-}
-
-model Elon {
-  id         Int       @id @default(autoincrement())
-  name       String
-  image      String
-  userId     Int
-  user       User      @relation(fields: [userId], references: [id])
-  category   Category? @relation(fields: [categoryId], references: [id])
-  categoryId Int?
-  Product    Product?  @relation(fields: [productId], references: [id])
-  productId  Int?
 }
 
 model Category {
   id        Int      @id @default(autoincrement())
-  name      String
+  name      String   @unique
+  products  Product[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  Elon      Elon[]
 }
 
 model Product {
-  id          Int      @id @default(autoincrement())
-  name        String
-  image       String
-  price       Float
-  description String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  Elon        Elon[]
-}
-
-// This is an enum for user roles
-
-enum Role {
-  USER
-  ADMIN
-  SUPER_ADMIN
-  SALLER
+  id             Int       @id @default(autoincrement())
+  name           String
+  image          String
+  description    String
+  oldPrice       Float
+  newPrice       Float
+  discountAmount Float     // chegirma summasi
+  discountType   String    // "percent" yoki "amount"
+  expiryDate     DateTime
+  location       String    // shahar yoki tuman (text sifatida)
+  categoryId     Int
+  category       Category  @relation(fields: [categoryId], references: [id])
+  userId         Int
+  user           User      @relation(fields: [userId], references: [id])
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 }
