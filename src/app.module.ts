@@ -3,9 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { MulterModule } from './multe-r/multer.module';
+import { RegionModule } from './region/region.module';
 
 @Module({
-  imports: [UserModule, MulterModule],
+  imports: [UserModule, MulterModule, RegionModule],
   controllers: [AppController],
   providers: [AppService],
 })
