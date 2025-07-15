@@ -4,11 +4,12 @@ import { UserController } from './user.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { PrismaModule } from '../prisma/prisma.module';
 import { MailService } from 'src/mail/mail.service';
+import { config } from 'process';
 @Module({
   imports: [
     PrismaModule,
     JwtModule.register({
-      secret: 'ustatop',
+      secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1h' },
       global: true,
     }),
