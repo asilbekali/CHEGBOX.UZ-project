@@ -58,8 +58,8 @@ RBAC (Role-Based Access Control) orqali bu rollarga mos ravishda ruxsatlar nazor
 
 ```bash
 # 1. Repozitoriyani klonlash
-git clone https://github.com/username/chegbox-backend.git
-cd chegbox-backend
+git clone https://github.com/asilbekali/CHEGBOX.UZ-project.git
+cd CHEGBOX.UZ-project
 
 # 2. Paketlarni o‘rnatish
 npm install
@@ -96,7 +96,7 @@ ESKIZ_API_KEY="eskiz-token" //eskiz commitdan ochib qoyish kerak !
 Swagger UI orqali backend API'ni real vaqtda test qilish mumkin:
 
 ```
-GET http://localhost:3000/api-docs
+GET http://localhost:3000/api
 ```
 
 ---
