@@ -20,6 +20,7 @@ enum UserStatus {
 }
 
 
+// created
 model Region {
   id        Int      @id @default(autoincrement())
   name      String   @unique
@@ -28,6 +29,7 @@ model Region {
   updatedAt DateTime @updatedAt
 }
 
+// created
 model User {
   id        Int        @id @default(autoincrement())
   full_name String
@@ -55,7 +57,7 @@ model Product {
   oldPrice       Float
   newPrice       Float
   discountAmount Float
-  discountType   String // "percent" yoki "amount"
+  discountType   String 
   expiryDate     DateTime
   location       String
   categoryId     Int
