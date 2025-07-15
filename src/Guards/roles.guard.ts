@@ -22,7 +22,9 @@ export class RolesGuard implements CanActivate {
       return true;
     }
 
-    if (role.includes(reqData['user'].role)) {
+    const roleUser = String(reqData['user'].role).toLowerCase();
+
+    if (role.includes(roleUser)) {
       return true;
     } else {
       throw new UnauthorizedException('You have not access');

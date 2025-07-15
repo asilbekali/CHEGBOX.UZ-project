@@ -6,6 +6,7 @@ import { MulterModule } from './multe-r/multer.module';
 import { RegionModule } from './region/region.module';
 import { ConfigModule } from '@nestjs/config';
 import { ProductModule } from './product/product.module';
+import { CategoryModule } from './category/category.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { ProductModule } from './product/product.module';
       isGlobal: true,
     }),
     ProductModule,
+    CategoryModule,
   ],
 
   controllers: [AppController],
