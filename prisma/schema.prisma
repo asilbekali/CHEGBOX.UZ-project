@@ -19,6 +19,7 @@ enum UserStatus {
   noActive
 }
 
+// ////////////////////////////////////////////////////////////////////////////
 
 // created
 model Region {
@@ -49,6 +50,8 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
+
+// created
 model Product {
   id             Int      @id @default(autoincrement())
   name           String
@@ -68,6 +71,7 @@ model Product {
   updatedAt      DateTime @updatedAt
 }
 
+// created
 model Category {
   id        Int       @id @default(autoincrement())
   name      String    @unique
@@ -76,6 +80,7 @@ model Category {
   updatedAt DateTime  @updatedAt
 }
 
+// created
 model MySession {
   id         Int      @id @default(autoincrement())
   deviceIP   String

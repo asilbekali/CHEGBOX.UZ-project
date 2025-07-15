@@ -71,11 +71,4 @@ export class CreateProductDto {
   })
   @IsInt()
   categoryId: number;
-
-  @ApiProperty({
-    example: 12,
-    description: 'Mahsulotni qo‘shgan foydalanuvchi ID raqami',
-  })
-  @IsInt()
-  userId: number;
 }
