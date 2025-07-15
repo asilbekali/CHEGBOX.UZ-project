@@ -1,127 +1,123 @@
-# 🛍️ Chegbox.uz
+# 🛍️ Chegbox.uz - Backend
 
-**Chegbox.uz** — foydalanuvchilar va tadbirkorlar chegirmadagi mahsulot va xizmatlar haqidagi e’lonlarni joylashi va izlashlari mumkin bo‘lgan onlayn platforma.
+**Chegbox.uz** — chegirmadagi mahsulot va xizmatlar haqida e’lonlarni joylash va izlash imkonini beruvchi onlayn platformaning backend qismi.
 
-## 🎯 Maqsad
-
-Foydalanuvchilar uchun mahsulot va xizmatlardagi chegirmalarni tez va qulay topish, tadbirkorlar uchun esa ularni reklama qilish imkoniyatini yaratish.
+> Ushbu repozitoriyda loyihaning faqat **backend** qismi joylangan. Frontend keyinchalik ulanishi mumkin.
 
 ---
 
-## 🧩 Asosiy modullar
+## 📌 Loyiha haqida
 
-### 1. Asosiy sahifa
-- Logotip + navigatsiya menyusi
-- Qidiruv paneli (mahsulot nomi, kategoriya, shahar)
-- Eng so‘nggi va mashhur e’lonlar
-- Kategoriyalar ro‘yxati
-- Telegram kanalga ulanish
-
-### 2. E’lonlar sahifasi
-Har bir e’lon quyidagilardan iborat:
-- Rasmlar galereyasi
-- Mahsulot nomi va tavsifi
-- Chegirma miqdori (% yoki so‘mda)
-- Avvalgi va hozirgi narx
-- Amal qilish muddati
-- Lokatsiya (shahar, tuman)
-- Aloqa raqami yoki yozish tugmasi
-
-### 3. Kategoriya sahifalari
-- Elektronika
-- Kiyim-kechak
-- Xizmatlar
-- Avto
-- Oziq-ovqat
-- va boshqa yo‘nalishlar
-
-### 4. Qidiruv va filtr
-- Kategoriya
-- Narx oralig‘i
-- Chegirma foizi
-- Shahar
-- Qo‘shilgan sanasi (oxirgi e’lonlar)
-
-### 5. E’lon joylash sahifasi
-- Faqat ro‘yxatdan o‘tgan foydalanuvchilar uchun
-- Mahsulot nomi, tavsifi
-- Rasm yuklash
-- Eski narx / yangi narx
-- Chegirma miqdori (%)
-- Amal muddati
-- Lokatsiya
-- Aloqa ma’lumotlari
-
-### 6. Foydalanuvchi paneli
-- Mening e’lonlarim
-- E’lonni tahrirlash / o‘chirish
-- Profil sozlamalari
+Chegbox.uz — foydalanuvchilar va tadbirkorlar uchun chegirmadagi mahsulotlar va xizmatlar haqidagi ma’lumotlarni tez va oson joylash, ko‘rish hamda ulardan xabardor bo‘lish imkonini beruvchi onlayn platforma. Loyiha asosiy e’tiborni **foydalanuvchiga qulaylik**, **tezkor xabar yetkazish** va **rolga asoslangan boshqaruv tizimi**ga qaratadi.
 
 ---
 
-## 🔐 Autentifikatsiya
+## 🧑‍🤝‍🧑 Rollar va ularning vakolatlari
 
-- Ro‘yxatdan o‘tish / Kirish: email yoki telefon orqali
-- Admin panel — alohida autentifikatsiya bilan
+Loyihada foydalanuvchilar quyidagi rollardan biriga ega bo‘ladi:
 
----
+| ROL           | TA'RIFI                                                                 |
+|---------------|-------------------------------------------------------------------------|
+| `USER`        | Oddiy foydalanuvchi. E’lonlarni ko‘radi, izlaydi, lekin joylay olmaydi. |
+| `SELLER`      | E’lon joylashi mumkin. Mahsulotlarini qo‘shadi va boshqaradi.          |
+| `ADMIN`       | E’lonlarni tasdiqlash, o‘chirish, userlarni ko‘rish huquqiga ega.       |
+| `VIEWER_ADMIN`| Faqat ma’lumotlarni ko‘rish huquqiga ega (o‘zgartirish huquqisiz).       |
+| `SUPER_ADMIN` | To‘liq huquqli boshqaruvchi. Barcha funksiyalarga ruxsat bor.           |
 
-## ⚙️ Admin panel imkoniyatlari
-
-- E’lonlarni ko‘rish, tasdiqlash, o‘chirish
-- Foydalanuvchilarni boshqarish
-- Platforma statistikasi
-- Reklama joylarini boshqarish
-
----
-
-## 📱 Mobil moslik
-
-Barcha sahifalar to‘liq mobil mos dizayn bilan yaratiladi (responsive design).
+RBAC (Role-Based Access Control) orqali bu rollarga mos ravishda ruxsatlar nazorat qilinadi.
 
 ---
 
-## 📩 Bildirishnomalar
+## ⚙️ Texnologiyalar
 
-- Telegram orqali avtomatik bildirishnomalar
-- Shahar va kategoriya bo‘yicha filterlangan xabarnomalar
-
----
-
-## 💰 Monetizatsiya (kelajakdagi kengaytma uchun)
-
-- **Premium e’lonlar** — asosiy sahifaning yuqori qismida ko‘rsatiladi
-- **Reklama bannerlari** — to‘lov evaziga ko‘rsatiladigan joylar
-
----
-
-## 🧪 Texnologiyalar (misol uchun)
-
-> Agar bu qismi sizda tayyor bo‘lsa, qo‘shing. Misol:
-- Frontend: React.js / Next.js
-- Backend: Node.js (NestJS)
-- DB: PostgreSQL (Prisma ORM)
-- File Upload: Multer
-- Auth: JWT, OTP
-- Deployment: Vercel / Railway / Render
+- **NestJS** – Backend arxitekturasi
+- **PostgreSQL** – Ma’lumotlar bazasi
+- **Prisma ORM** – Ma’lumotlar bilan ishlash
+- **JWT** – Autentifikatsiya
+- **bcrypt** – Parollarni xashlash
+- **Nodemailer** – Email yuborish (tasdiqlash xatlari)
+- **Eskiz.uz** – SMS orqali OTP yuborish
+- **Swagger** – API hujjatlari
+- **RBAC** – Rollar orqali kirish nazorati
 
 ---
 
-## 📁 Loyihani ishga tushirish (Development)
+## 📁 Asosiy modullar
+
+- **Auth Module**: Ro‘yxatdan o‘tish, OTP yuborish, login, tokenlar
+- **User Module**: CRUD, rollar, verifikatsiya
+- **Product Module**: Mahsulot e’lonlari CRUD
+- **Category Module**: Kategoriya yaratish va ro‘yxat
+- **Region Module**: Viloyat/tuman bo‘yicha joylashuv
+- **Session Module**: Login sessiyalari tarixi
+- **Admin nazorati**: E’lonlarni tasdiqlash/o‘chirish, statistika
+
+---
+
+## 🚀 Loyihani ishga tushurish
 
 ```bash
-# Clone project
-git clone https://github.com/username/chegbox.uz.git
+# 1. Repozitoriyani klonlash
+git clone https://github.com/username/chegbox-backend.git
+cd chegbox-backend
 
-# Install dependencies
+# 2. Paketlarni o‘rnatish
 npm install
-
-# Yoki yarn ishlatsa
+# yoki
 yarn install
 
-# Prisma migration
-npx prisma generate
-npx prisma migrate dev
+# 3. .env faylni tayyorlash
+cp .env.example .env
 
-# Run project
+# 4. Prisma ORM: migratsiya va client yaratish
+npx prisma migrate dev
+npx prisma generate
+
+# 5. Serverni ishga tushurish
 npm run start:dev
+```
+
+---
+
+## 🔑 .env konfiguratsiya namunasi
+
+```env
+DATABASE_URL="postgresql://user:password@localhost:5432/chegbox"
+JWT_SECRET="secret-jwt-key"
+MAIL_USER="youremail@gmail.com"
+MAIL_PASSWORD="app-password"
+MAIL_FROM="youremail@gmail.com"
+ESKIZ_EMAIL="eskiz@example.com"
+ESKIZ_API_KEY="eskiz-token"
+```
+
+---
+
+## 📄 Swagger API hujjati
+
+Swagger UI orqali backend API'ni real vaqtda test qilish mumkin:
+
+```
+GET http://localhost:3000/api-docs
+```
+
+---
+
+## 📩 Xabarnomalar
+
+- OTP kod: `Eskiz.uz` orqali SMS yuboriladi
+- Email orqali: tasdiqlash yoki parol tiklash xabarlari yuboriladi (`nodemailer` bilan)
+
+---
+
+## 📝 Litsenziya
+
+Loyiha ochiq manba (open-source) bo‘lishi rejalashtirilmoqda. Hozircha maxsus litsenziya belgilanmagan.
+
+---
+
+## 🤝 Hissa qo‘shish
+
+Takliflar, `issue`lar va `pull request`lar orqali siz ham loyihaga hissa qo‘shishingiz mumkin!
+
+---
