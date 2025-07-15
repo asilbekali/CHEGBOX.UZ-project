@@ -86,9 +86,7 @@ DATABASE_URL="postgresql://user:password@localhost:5432/chegbox"
 JWT_SECRET="secret-jwt-key"
 MAIL_USER="youremail@gmail.com"
 MAIL_PASSWORD="app-password"
-MAIL_FROM="youremail@gmail.com"
-ESKIZ_EMAIL="eskiz@example.com"
-ESKIZ_API_KEY="eskiz-token"
+ESKIZ_API_KEY="eskiz-token" //eskiz commitdan ochib qoyish kerak !
 ```
 
 ---
