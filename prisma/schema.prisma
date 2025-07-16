@@ -12,8 +12,9 @@ enum Role {
   ADMIN
   SUPER_ADMIN
   SELLER
-  VIEWER_ADMIN 
+  VIEWER_ADMIN
 }
+
 enum UserStatus {
   active
   noActive
@@ -50,7 +51,6 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
-
 // created
 model Product {
   id             Int      @id @default(autoincrement())
@@ -60,7 +60,7 @@ model Product {
   oldPrice       Float
   newPrice       Float
   discountAmount Float
-  discountType   String 
+  discountType   String
   expiryDate     DateTime
   location       String
   categoryId     Int
@@ -75,9 +75,20 @@ model Product {
 model Category {
   id        Int       @id @default(autoincrement())
   name      String    @unique
+  image     String
   products  Product[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  elon      elon[]
+}
+
+model elon {
+  id          Int      @id @default(autoincrement())
+  image       String
+  description String
+  title       String
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
 }
 
 // created
