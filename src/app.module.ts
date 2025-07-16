@@ -7,6 +7,7 @@ import { RegionModule } from './region/region.module';
 import { ConfigModule } from '@nestjs/config';
 import { ProductModule } from './product/product.module';
 import { CategoryModule } from './category/category.module';
+import { ElonModule } from './elon/elon.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { CategoryModule } from './category/category.module';
     }),
     ProductModule,
     CategoryModule,
+    ElonModule,
   ],
 
   controllers: [AppController],
