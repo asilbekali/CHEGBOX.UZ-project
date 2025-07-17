@@ -1,8 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { ElonService } from './elon.service';
 import { CreateElonDto } from './dto/create-elon.dto';
 import { UpdateElonDto } from './dto/update-elon.dto';
+import { ApiTags, ApiQuery } from '@nestjs/swagger';
 
+@ApiTags('Elonlar')
 @Controller('elon')
 export class ElonController {
   constructor(private readonly elonService: ElonService) {}
@@ -13,8 +24,12 @@ export class ElonController {
   }
 
   @Get()
-  findAll() {
-    return this.elonService.findAll();
+  @ApiQuery({ name: 'page', required: false, example: 1 })
+  @ApiQuery({ name: 'limit', required: false, example: 10 })
+  @ApiQuery({ name: 'categoryId', required: false, example: 3 })
+  @ApiQuery({ name: 'search', required: false, example: 'kompyuter' })
+  findAll(@Query() query: any) {
+    return this.elonService.findAll(query);
   }
 
   @Get(':id')
