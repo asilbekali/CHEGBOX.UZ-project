@@ -1,4 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { CreateElonDto } from './dto/create-elon.dto';
 import { UpdateElonDto } from './dto/update-elon.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -8,6 +13,17 @@ export class ElonService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createElonDto: CreateElonDto) {
+    const { categoryId } = createElonDto;
+
+    // categoryId mavjudligini tekshirish
+    const categoryExists = await this.prisma.category.findUnique({
+      where: { id: categoryId },
+    });
+
+    if (!categoryExists) {
+      throw new BadRequestException(`Kategoriya ID ${categoryId} mavjud emas`);
+    }
+
     return this.prisma.elon.create({
       data: createElonDto,
     });
@@ -62,12 +78,38 @@ export class ElonService {
   }
 
   async findOne(id: number) {
-    return this.prisma.elon.findUnique({
+    const elon = await this.prisma.elon.findUnique({
       where: { id },
     });
+
+    if (!elon) {
+      throw new NotFoundException(`ID ${id} bilan e'lon topilmadi`);
+    }
+
+    return elon;
   }
 
   async update(id: number, updateElonDto: UpdateElonDto) {
+    const existing = await this.prisma.elon.findUnique({
+      where: { id },
+    });
+
+    if (!existing) {
+      throw new NotFoundException(`ID ${id} bilan e'lon topilmadi`);
+    }
+
+    if (updateElonDto.categoryId) {
+      const categoryExists = await this.prisma.category.findUnique({
+        where: { id: updateElonDto.categoryId },
+      });
+
+      if (!categoryExists) {
+        throw new BadRequestException(
+          `Kategoriya ID ${updateElonDto.categoryId} mavjud emas`,
+        );
+      }
+    }
+
     return this.prisma.elon.update({
       where: { id },
       data: updateElonDto,
@@ -75,6 +117,14 @@ export class ElonService {
   }
 
   async remove(id: number) {
+    const existing = await this.prisma.elon.findUnique({
+      where: { id },
+    });
+
+    if (!existing) {
+      throw new NotFoundException(`ID ${id} bilan e'lon topilmadi`);
+    }
+
     return this.prisma.elon.delete({
       where: { id },
     });
