@@ -28,6 +28,7 @@ export class CategoryService {
       return await this.prisma.category.create({
         data: {
           name: createCategoryDto.name,
+          image: createCategoryDto.image,
         },
       });
     } catch (error) {

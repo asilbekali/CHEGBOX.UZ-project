@@ -9,4 +9,12 @@ export class CreateCategoryDto {
   @IsNotEmpty()
   @IsString()
   name: string;
+
+  @ApiProperty({
+    example: 'https://example.com/images/electronics.jpg',
+    description: 'Kategoriya uchun rasm URL manzili',
+  })
+  @IsNotEmpty()
+  @IsString()
+  image: string;
 }
