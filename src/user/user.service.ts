@@ -28,11 +28,18 @@ export class UserService {
 
   async registerUser(dto: CreateUserDto) {
     try {
-      const existing = await this.prisma.user.findUnique({
+      const existingEmail = await this.prisma.user.findUnique({
         where: { email: dto.email },
       });
-      if (existing) {
+      if (existingEmail) {
         throw new BadRequestException('Email already exists');
+      }
+
+      const existingPhone = await this.prisma.user.findUnique({
+        where: { phone: dto.phone },
+      });
+      if (existingPhone) {
+        throw new BadRequestException('Phone number already exists');
       }
 
       const region = await this.prisma.region.findUnique({
@@ -81,11 +88,18 @@ export class UserService {
 
   async registerAdmin(dto: CreateUserDto) {
     try {
-      const existing = await this.prisma.user.findUnique({
+      const existingEmail = await this.prisma.user.findUnique({
         where: { email: dto.email },
       });
-      if (existing) {
+      if (existingEmail) {
         throw new BadRequestException('Email already exists');
+      }
+
+      const existingPhone = await this.prisma.user.findUnique({
+        where: { phone: dto.phone },
+      });
+      if (existingPhone) {
+        throw new BadRequestException('Phone number already exists');
       }
 
       const region = await this.prisma.region.findUnique({
@@ -134,11 +148,18 @@ export class UserService {
 
   async registerSupperAdmin(dto: CreateUserDto) {
     try {
-      const existing = await this.prisma.user.findUnique({
+      const existingEmail = await this.prisma.user.findUnique({
         where: { email: dto.email },
       });
-      if (existing) {
+      if (existingEmail) {
         throw new BadRequestException('Email already exists');
+      }
+
+      const existingPhone = await this.prisma.user.findUnique({
+        where: { phone: dto.phone },
+      });
+      if (existingPhone) {
+        throw new BadRequestException('Phone number already exists');
       }
 
       const region = await this.prisma.region.findUnique({
@@ -185,15 +206,20 @@ export class UserService {
     }
   }
 
-
-
-    async registerSeller(dto: CreateUserDto) {
+  async registerSeller(dto: CreateUserDto) {
     try {
-      const existing = await this.prisma.user.findUnique({
+      const existingEmail = await this.prisma.user.findUnique({
         where: { email: dto.email },
       });
-      if (existing) {
+      if (existingEmail) {
         throw new BadRequestException('Email already exists');
+      }
+
+      const existingPhone = await this.prisma.user.findUnique({
+        where: { phone: dto.phone },
+      });
+      if (existingPhone) {
+        throw new BadRequestException('Phone number already exists');
       }
 
       const region = await this.prisma.region.findUnique({
@@ -239,7 +265,6 @@ export class UserService {
       );
     }
   }
-
 
   async verify(email: string, otp: string) {
     try {
